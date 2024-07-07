@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.crud.crud_app.model.Medicine;
 import com.example.crud.crud_app.repo.MedicineRepository;
+import com.example.crud.crud_app.util.Patcher;
+import com.github.fge.jsonpatch.JsonPatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,9 @@ public class MedicineController {
 
     @Autowired
     MedicineRepository medicineRepository;
+
+    @Autowired
+    Patcher patcher;
 
     @GetMapping("/getAllMedicines")
     public ResponseEntity<List<Medicine>> getAllMedicines() {
@@ -77,20 +82,40 @@ public class MedicineController {
         }
     }
 
+    @PatchMapping("/updateCompany/{id}")
+    public ResponseEntity<Medicine> updateSingleMed(@PathVariable Long id, @RequestBody String comp) {
+        try {
+            Optional<Medicine> medData = medicineRepository.findById(id);
+            if (medData.isPresent()) {
+                Medicine updatedData = medData.get();
+                
+                updatedData.setCompany(comp);
+                medicineRepository.save(updatedData);
+
+                return new ResponseEntity<>(updatedData, HttpStatus.CREATED);
+            }
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @DeleteMapping("/deleteMedById/{id}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable Long id) {
+    public ResponseEntity<String> deleteMed(@PathVariable Long id) {
         try {
             medicineRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Deleted with id" + id.toString() ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @DeleteMapping("/deleteAllMed")
-    public ResponseEntity<HttpStatus> deleteAllBooks() {
+    public ResponseEntity<String> deleteAllMed() {
         try {
             medicineRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Deleted All" ,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
