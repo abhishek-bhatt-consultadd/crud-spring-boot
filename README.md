@@ -38,6 +38,13 @@ endpoint: `/deleteAllMed`
 SS: <img width="1001" alt="image" src="https://github.com/abhishek-bhatt-consultadd/crud-spring-boot/assets/174770106/d98f2948-48ba-477e-922a-ccd6f5266bfa">
 
 
+- Update company (patch)
+endpoint: `updateCompany/{id}`
+
+SS: <img width="997" alt="image" src="https://github.com/abhishek-bhatt-consultadd/crud-spring-boot/assets/174770106/95e1929d-f403-46f2-9691-58d05002b591">
+
+
+
 
 
 
