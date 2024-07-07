@@ -82,24 +82,24 @@ public class MedicineController {
         }
     }
 
-    // @PatchMapping("/updateSingleMedicine/{id}")
-    // public ResponseEntity<Medicine> updateSingleMed(@PathVariable Long id, @RequestBody JsonPatch patch) {
-    //     try {
-    //         Optional<Medicine> medData = medicineRepository.findById(id);
-    //         if (medData.isPresent()) {
-    //             Medicine updatedData = medData.get();
+    @PatchMapping("/updateCompany/{id}")
+    public ResponseEntity<Medicine> updateSingleMed(@PathVariable Long id, @RequestBody String comp) {
+        try {
+            Optional<Medicine> medData = medicineRepository.findById(id);
+            if (medData.isPresent()) {
+                Medicine updatedData = medData.get();
                 
-    //             Patcher.internPatcher(updatedData, patch);
-    //             medicineRepository.save(updatedData);
+                updatedData.setCompany(comp);
+                medicineRepository.save(updatedData);
 
-    //             return new ResponseEntity<>(updatedData, HttpStatus.CREATED);
-    //         }
+                return new ResponseEntity<>(updatedData, HttpStatus.CREATED);
+            }
 
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     } catch (Exception e) {
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
     @DeleteMapping("/deleteMedById/{id}")
