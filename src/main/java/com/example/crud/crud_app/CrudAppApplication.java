@@ -8,7 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 public class CrudAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrudAppApplication.class, args);
+		SpringApplication.run(
+            CrudAppApplication.class,
+            args);
 	}
 
 }

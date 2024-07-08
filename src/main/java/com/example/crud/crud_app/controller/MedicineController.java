@@ -9,21 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import com.example.crud.crud_app.model.Medicine;
 import com.example.crud.crud_app.repo.MedicineRepository;
 import com.example.crud.crud_app.services.CrudServices;
-import com.example.crud.crud_app.util.Patcher;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class MedicineController {
 
-    @Autowired
-    MedicineRepository medicineRepository;
+    @Autowired MedicineRepository medicineRepository;
     @Autowired CrudServices service;
 
-    @Autowired
-    Patcher patcher;
-
-    @GetMapping("/getAllMedicines")
+    @GetMapping("/getAllMedicine")
     public ResponseEntity<List<Medicine>> getAllMedicines() {
        return service.getAllUsers();
     }
@@ -31,6 +26,11 @@ public class MedicineController {
     @GetMapping("/getMedicinebyId/{id}")
     public ResponseEntity<Medicine> getMedicineById(@PathVariable Long id) {
         return service.getUserById(id);
+    }
+
+    @GetMapping("/")
+    public String Home(){
+        return ("<h1>Welcome</h1>");
     }
 
     @PostMapping("/addMedicines")
