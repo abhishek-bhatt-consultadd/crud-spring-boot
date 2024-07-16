@@ -3,44 +3,62 @@ package com.example.crud.crud_app.payload.response;
 
 import java.util.List;
 
+
 public class UserInfoResponse {
-	private Long id;
-	private String username;
-	private String email;
-	private List<String> roles;
+    private Long id;
+    private String username;
+    private String email;
+    private final List<String> roles;
+    private String token;
 
-	public UserInfoResponse(Long id, String username, String email, List<String> roles) {
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.roles = roles;
-	}
+    public UserInfoResponse(Long id, String username, String email, List<String> roles) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public UserInfoResponse(Long id, String username, String email, List<String> roles, String token) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
+        this.token = token;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public List<String> getRoles() {
-		return roles;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

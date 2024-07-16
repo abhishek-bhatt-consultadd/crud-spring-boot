@@ -68,18 +68,18 @@ public class WebSecurityConfig  {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         //.antMatchers("/index.html", "/", "/home", "/login").permitAll()
-        .authorizeHttpRequests(auth -> 
-          auth.requestMatchers("/api/auth/**").permitAll()
-              .requestMatchers("/api/test/**").permitAll().and()
-        ).logout().logoutUrl("/");
+//        .authorizeHttpRequests(auth ->
+//          auth.requestMatchers("/api/auth/**").permitAll()
+//              .requestMatchers("/api/test/**").permitAll().and()
+//        ).logout().logoutUrl("/");
     
         http
         . authorizeHttpRequests()
         .requestMatchers("/**").permitAll()
       .anyRequest().authenticated();
- // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
+
     http.headers(headers -> headers.frameOptions(frameOption -> frameOption.sameOrigin()));
     
     http.authenticationProvider(authenticationProvider());
